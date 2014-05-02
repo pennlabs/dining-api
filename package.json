@@ -1,0 +1,13 @@
+{
+  "name": "dining-api",
+  "description": "Penn Dining API",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "cheerio": "^0.15.0",
+    "express": "3.x",
+    "moment": "^2.6.0",
+    "mongodb": "^1.4.2",
+    "request": "^2.34.0"
+  }
+}

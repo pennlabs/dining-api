@@ -10,45 +10,9 @@ db = new Db('dining', server, {safe: true});
 db.open(function(err, db) {
   if (!err) {
     console.log("Connected to 'dining' database");
-    db.collection('menus', {strict: true}, function(err, collection) {
-      if (err) {
-        console.log("The 'menus' collection does not exist. Creating it with sample data...");
-        populateDB();
-      }
-    });
+    db.collection('menus', {strict: true}, function(err, collection) {});
   }
 });
-
-var populateDB = function() {
-  var menus = [
-  {
-    name: "Commons",
-    menu: {
-      lunch: {
-        "grill": ["fries", "vegan burger"],
-        "comfort": ["chicken", "rice"]
-      },
-      dinner: {
-        "pizza": ["pizza"],
-        "kettles": ["bean soup"]
-      }
-    }
-  },
-  {
-    name: "Hill",
-    menu: {
-      lunch: {
-        "grill": ["fries", "cheeseburger"],
-        "comfort": ["beef", "rice"]
-      }
-    }
-  }];
-
-  db.collection('menus', function(err, collection) {
-    collection.insert(menus, function(err, result) {});
-  });
-};
-
 
 var findAll = function(req, res) {
   db.collection('menus', function(err, collection) {
@@ -69,10 +33,10 @@ var findById = function(req, res) {
 };
 
 var findByName = function(req, res) {
-  var id = req.params.id;
-  console.log('Retrieving menu: ' + id);
+  var hall = req.params.hall;
+  console.log('Retrieving menu: ' + hall);
   db.collection('menus', function(err, collection) {
-    var re = new RegExp(id, "i");
+    var re = new RegExp(hall, "i");
     collection.findOne({'name': re}, function(err, item) {
       res.send(item);
     });
@@ -80,11 +44,11 @@ var findByName = function(req, res) {
 };
 
 var findByNameMeal = function(req, res) {
-  var id = req.params.id;
+  var hall = req.params.hall;
   var meal = req.params.meal;
-  console.log('Retrieving menu: ' + id);
+  console.log('Retrieving menu: ' + hall);
   db.collection('menus', function(err, collection) {
-    var re = new RegExp(id, "i");
+    var re = new RegExp(hall, "i");
     collection.findOne({'name': re}, function(err, item) {
       mealMenu = item.menu[meal]
       delete item.menu

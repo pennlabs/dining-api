@@ -30,6 +30,11 @@ app.get('/open/:hall', hours.openHall);
 app.get('/scrape', scrape.scrape);
 app.get('/scrape/:hall', scrape.scrapeHall);
 
+// 404 message on all other routes
+app.get('*', function(req, res) {
+  res.send({'error': '404'}, 404);
+});
+
 app.listen(3000);
 console.log('Listening on port 3000...');
 

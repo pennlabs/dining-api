@@ -177,18 +177,15 @@ var hours_json =
 }
 
 var hoursAll = function(req, res) {
-  console.log('Retrieving all hours');
   res.send(hours_json);
 };
 
 var hoursHall = function(req, res) {
   var hall = req.params.hall;
-  console.log('Retrieving hours for ' + hall);
   res.send(hours_json[hall]);
 }
 
 var openAll = function(req, res) {
-  console.log('Retrieving all openings');
   var open_json = {}
   for (hall in hours_json) {
     if (isOpen(hours_json[hall])) {
@@ -204,7 +201,6 @@ var openAll = function(req, res) {
 var openHall = function(req, res) {
   var hall = req.params.hall;
   var open_json = {}
-  console.log('Retrieving whether ' + hall + ' is open');
   if (isOpen(hours_json[hall])) {
     open_json[hall] = "open";
   }

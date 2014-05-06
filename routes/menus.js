@@ -9,7 +9,6 @@ db = new Db('dining', server, {safe: true});
 
 db.open(function(err, db) {
   if (!err) {
-    console.log("Connected to 'dining' database");
     db.collection('menus', {strict: true}, function(err, collection) {});
   }
 });
@@ -31,7 +30,6 @@ var findAll = function(req, res) {
 
 var findById = function(req, res) {
   var id = req.params.id;
-  console.log('Retrieving menu: ' + id);
   db.collection('menus', function(err, collection) {
     collection.findOne({'_id': new BSON.ObjectID(id)}, function(err, item) {
       res.send(item);
@@ -41,7 +39,6 @@ var findById = function(req, res) {
 
 var findByName = function(req, res) {
   var hall = req.params.hall.toLowerCase();
-  console.log('Retrieving menu: ' + hall);
   db.collection('menus', function(err, collection) {
     collection.find().sort({_id:-1}).limit(1).toArray(function(err, items) {
       hallData = items[0][hall];
@@ -54,7 +51,6 @@ var findByName = function(req, res) {
 var findByNameMeal = function(req, res) {
   var hall = req.params.hall.toLowerCase();
   var meal = req.params.meal.toLowerCase();
-  console.log('Retrieving menu: ' + hall);
   db.collection('menus', function(err, collection) {
     collection.find().sort({_id:-1}).limit(1).toArray(function(err, items) {
       hallData = items[0][hall];

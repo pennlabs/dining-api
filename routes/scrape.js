@@ -11,7 +11,6 @@ db = new Db('dining', server, {safe: true});
 
 db.open(function(err, db) {
   if (!err) {
-    console.log("Connected to 'dining' database");
     db.collection('menus', {strict: true}, function(err, collection) {
       if (err) {
         console.log("The 'menus' collection does not exist. Creating it with current data...");

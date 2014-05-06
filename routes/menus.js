@@ -63,4 +63,3 @@ module.exports.findAll = findAll;
 module.exports.findById = findById;
 module.exports.findByName = findByName;
 module.exports.findByNameMeal = findByNameMeal;
-

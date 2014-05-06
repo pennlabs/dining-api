@@ -218,4 +218,3 @@ module.exports.hoursAll = hoursAll;
 module.exports.hoursHall = hoursHall;
 module.exports.openAll = openAll;
 module.exports.openHall = openHall;
-

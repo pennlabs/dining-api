@@ -14,10 +14,17 @@ db.open(function(err, db) {
   }
 });
 
+var hallNames = {
+  "commons": "1920 Commons",
+  "hill": "Hill House",
+  "mcclelland": "Cafe at McClelland",
+  "kceh": "Kings Court English House"
+}
+
 var findAll = function(req, res) {
   db.collection('menus', function(err, collection) {
-    collection.find().toArray(function(err, items) {
-      res.send(items);
+    collection.find().sort({_id:-1}).limit(1).toArray(function(err, items) {
+      res.send(items[0]);
     });
   });
 };
@@ -33,28 +40,26 @@ var findById = function(req, res) {
 };
 
 var findByName = function(req, res) {
-  var hall = req.params.hall;
+  var hall = req.params.hall.toLowerCase();
   console.log('Retrieving menu: ' + hall);
   db.collection('menus', function(err, collection) {
-    var re = new RegExp(hall, "i");
-    collection.findOne({'name': re}, function(err, item) {
-      res.send(item);
+    collection.find().sort({_id:-1}).limit(1).toArray(function(err, items) {
+      hallData = items[0][hall];
+      hallData["name"] = hallNames[hall];
+      res.send(hallData);
     });
   });
 };
 
 var findByNameMeal = function(req, res) {
-  var hall = req.params.hall;
-  var meal = req.params.meal;
+  var hall = req.params.hall.toLowerCase();
+  var meal = req.params.meal.toLowerCase();
   console.log('Retrieving menu: ' + hall);
   db.collection('menus', function(err, collection) {
-    var re = new RegExp(hall, "i");
-    collection.findOne({'name': re}, function(err, item) {
-      mealMenu = item.menu[meal]
-      delete item.menu
-      item.menu = {}
-      item.menu[meal] = mealMenu
-      res.send(item);
+    collection.find().sort({_id:-1}).limit(1).toArray(function(err, items) {
+      hallData = items[0][hall];
+      mealData = hallData[meal];
+      res.send(mealData);
     });
   });
 };

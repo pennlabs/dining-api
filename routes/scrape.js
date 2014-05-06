@@ -89,7 +89,7 @@ var scrapeHall = function(req, res) {
           food[mealName][headingName] =
             $(heading.next.next.children)
               .map(function(i, e) {
-              return $(e).text().trim();
+                return $(e).text().trim();
               })
               .toArray();
         });

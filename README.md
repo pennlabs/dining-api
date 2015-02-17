@@ -1,6 +1,8 @@
 Penn Dining API
 ===============
 
+**DEPRECATED**: Use the [Penn OpenData Dining service](https://esb.isc-seo.upenn.edu/8091/documentation/#dining) instead.
+
 Sample Queries
 --------------
 
